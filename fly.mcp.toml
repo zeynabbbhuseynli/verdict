@@ -1,0 +1,26 @@
+app = "verdict-mcp"
+primary_region = "iad"
+
+[build]
+  dockerfile = "mcp-server/Dockerfile"
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 8001
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+
+[checks]
+  [checks.health]
+    grace_period = "10s"
+    interval = "15s"
+    method = "get"
+    path = "/health"
+    timeout = "5s"
+    type = "http"

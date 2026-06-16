@@ -1,0 +1,18 @@
+{
+  "name": "VERDICT Forensic System",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "dockerDashComposeVersion": "v2"
+    }
+  },
+  "postCreateCommand": "echo \"GOOGLE_API_KEY=${GOOGLE_API_KEY}\" > .env && docker compose up -d --build",
+  "forwardPorts": [80],
+  "portsAttributes": {
+    "80": {
+      "label": "VERDICT App",
+      "visibility": "public",
+      "onAutoForward": "openBrowser"
+    }
+  }
+}
